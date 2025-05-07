@@ -1,0 +1,43 @@
+---
+const { title = 'タイトル', subTitle = 'サブタイトル' } = Astro.props;
+---
+
+<hgroup class="title-primary">
+  <h2 class="title-primary__title js-one-character">{title}</h2>
+  <p class="title-primary__sub-title js-fadeIn">{subTitle}</p>
+</hgroup>
+
+<style>
+  .title-primary {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .title-primary__title {
+    font-size: 56px;
+    font-size: clamp(1.75rem, 1.134rem + 2.63vw, 3.5rem);
+    font-family: var(--fontLore);
+    line-height: 1;
+    letter-spacing: 0.08em;
+  }
+
+  .title-primary__sub-title {
+    font-size: clamp(0.875rem, 0.831rem + 0.19vw, 1rem);
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 599px) {
+    .title-primary {
+      gap: 8px;
+    }
+    .title-primary__title {
+      line-height: calc(42 / 28);
+    }
+
+    .title-primary__sub-title {
+      line-height: calc(21 / 14);
+    }
+  }
+</style>

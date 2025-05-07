@@ -1,0 +1,279 @@
+---
+const featureItems = [
+  {
+    title: `「人に見せたくなるカラダ作り」に<br />こだわったトレーニング`,
+    text: `体重を落とすだけではなく、人に見せたくなるカラダを目指したトレーニングをします。引き締まった魅力的なカラダになると、自信を持つことができます。`,
+    image: featureImage01,
+    alt: 'alt01',
+  },
+  {
+    title: `お尻・太ももなどの部位を<br />効率的に鍛える最先端マシンの導入`,
+    text: `お尻や太ももを引き締めるトレーニングをするためのヒップスラスターという最先端のマシンを導入。<br />女性の美尻をつくると有名なマシンです。`,
+    image: featureImage02,
+    alt: 'alt02',
+  },
+  {
+    title: `厳しい食事制限なし&<br />トレーニングは週一～二回でOK`,
+    text: `厳しい食事制限ではなく、正しい食事習慣を身に着けられるようにサポートします。<br />トレーニングは週1回、たったの50分でOKなので、仕事や家事が忙しくてもご利用いただけます。`,
+    image: featureImage03,
+    alt: 'alt03',
+  },
+  {
+    title: `確実に筋肉をつけるので<br />リバウンドと無縁`,
+    text: `リバウンドの多くの原因は筋肉が落ちてしまって基礎代謝がおちてしまうこと。MELIA FITNESSのプログラムは確実に筋肉をつけるのでリバウンドしにくい身体になれます。`,
+    image: featureImage04,
+    alt: 'alt04',
+  },
+  {
+    title: `"ボディメイクを楽しむ"がモットー<br />なので楽しく続けられる`,
+    text: `MELIA FITNESSはその方のなりたい体に合わせて、無理のない継続できるトレーニングを提案いたします。トレーニングと正しい食生活を継続すると、１～２か月で効果を感じていただけます。あなたの体が引き締まっていくのを感じると楽しく前向きに続けることができます。`,
+    image: featureImage05,
+    alt: 'alt05',
+  },
+];
+
+import TitlePrimary from '../../elements/Title/TitlePrimary.astro';
+
+import { Image } from 'astro:assets';
+import featureImage01 from '../../../assets/images/index/feature/feature_image01.png';
+import featureImage02 from '../../../assets/images/index/feature/feature_image02.png';
+import featureImage03 from '../../../assets/images/index/feature/feature_image03.png';
+import featureImage04 from '../../../assets/images/index/feature/feature_image04.png';
+import featureImage05 from '../../../assets/images/index/feature/feature_image05.png';
+import featureYogaImagePc from '../../../assets/images/index/feature/feature_yoga.png';
+import featureYogaImageSp from '../../../assets/images/index/feature/feature_yoga-sp.png';
+---
+
+<section id="feature" class="feature">
+  <div class="feature__inner inner-primary">
+    <div class="feature__induction">
+      <p class="feature__induction--text">
+        MELIA FITNESSは<br class="br-sp-visible" />そんな悩みをお持ちの方にこそ
+        <br />ご利用していただきたい理由があります。
+      </p>
+    </div>
+    <div class="feature__arrow"></div>
+    <div class="feature__head">
+      <TitlePrimary
+        title="FEATURE"
+        subTitle="MELIA FITNESSが選ばれる5つの特徴"
+      />
+    </div>
+    <div class="feature__boxes">
+      {
+        featureItems.map((featureItem) => (
+          <div class="feature__box js-fadeIn">
+            <div class="feature__box--body">
+              <h3 class="feature__box--heading3" set:html={featureItem.title} />
+              <div class="feature__box--text-wrap">
+                <p class="feature__box--text" set:html={featureItem.text} />
+              </div>
+            </div>
+            <div class="feature__box--image">
+              <Image src={featureItem.image} alt={featureItem.alt} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="feature__figure js-gsap-ph-trg">
+    <figure class="feature__figure--image-wrap">
+      <picture>
+        <source srcset={featureYogaImageSp.src} media="(max-width: 599px)" />
+        <Image src={featureYogaImagePc} class="js-gsap-ph" alt={''} />
+      </picture>
+    </figure>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const gsapPhotoTargets = document.querySelectorAll('.js-gsap-ph-trg');
+
+  gsapPhotoTargets.forEach((gsapPhotoTarget) => {
+    const gsapPhotoTargetItem = gsapPhotoTarget.querySelector('.js-gsap-ph');
+
+    const gsapPhotoTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: gsapPhotoTarget,
+        start: 'top 100%',
+        end: 'center center',
+        scrub: 1,
+        // markers: true,
+      },
+    });
+
+    const gsapPhotoTL2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: gsapPhotoTarget,
+        start: 'top 100%',
+        end: 'top top',
+        scrub: 1,
+        // markers: true,
+      },
+    });
+
+    gsapPhotoTL.set(gsapPhotoTargetItem, {
+      filter: 'blur(20px) grayscale(1) brightness(1.5)',
+      scale: 1.4,
+    });
+
+    gsapPhotoTL
+      .to(gsapPhotoTargetItem, {
+        filter: 'blur(0px) grayscale(1) brightness(1.5)',
+      })
+      .to(gsapPhotoTargetItem, {
+        filter: 'blur(0px) grayscale(0) brightness(1)',
+      });
+
+    gsapPhotoTL2.to(gsapPhotoTargetItem, {
+      scale: 1,
+    });
+  });
+</script>
+
+<style>
+  .feature {
+    padding-top: 96px;
+  }
+
+  .feature__induction {
+    text-align: center;
+  }
+
+  .feature__induction--text {
+    font-size: 32px;
+    font-size: clamp(1rem, 0.648rem + 1.5vw, 2rem);
+    font-weight: 600;
+    line-height: calc(64 / 32);
+    color: var(--textSecondary);
+    letter-spacing: 0.1em;
+  }
+
+  .feature__arrow {
+    margin-top: 6px;
+    width: 56px;
+    height: 56px;
+    margin-inline: auto;
+    transform: rotate(-45deg);
+    border-left: 1px solid var(--borderPrimary);
+    border-bottom: 1px solid var(--borderPrimary);
+  }
+
+  .feature__head {
+    margin-top: 74px;
+    text-align: center;
+  }
+
+  .feature__boxes {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .feature__box {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .feature__box--body {
+    max-width: calc((540 / 1060) * 100%);
+    width: 100%;
+  }
+
+  .feature__box--heading3 {
+    padding-left: 20px;
+    font-size: 28px;
+    font-size: clamp(1.125rem, 0.905rem + 0.94vw, 1.75rem);
+    line-height: calc(50 / 28);
+    letter-spacing: 0.1em;
+    border-left: 1px solid var(--borderPrimary);
+  }
+
+  .feature__box--text-wrap {
+    margin-top: 32px;
+  }
+
+  .feature__box--text {
+    line-height: calc(32 / 16);
+  }
+
+  .feature__box--image {
+    max-width: calc((450 / 1060) * 100%);
+    width: 100%;
+  }
+
+  .feature__figure {
+    margin-top: 96px;
+  }
+
+  @media (max-width: 768px) {
+    .feature__box {
+      flex-direction: column-reverse;
+    }
+
+    .feature__box--body,
+    .feature__box--image {
+      max-width: 80%;
+    }
+
+    .feature__box--body {
+      margin-top: 20px;
+    }
+
+    .feature__box--heading3 {
+      border: none;
+    }
+
+    .feature__box--text-wrap {
+      margin-top: 12px;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .feature {
+      margin-top: 48px;
+    }
+
+    .feature__arrow {
+      margin-top: 16px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .feature__head {
+      margin-top: 31px;
+    }
+
+    .feature__boxes {
+      margin-top: 40px;
+      gap: 40px;
+    }
+
+    .feature__box--body,
+    .feature__box--image {
+      max-width: 100%;
+    }
+
+    .feature__box--heading3 {
+      padding-left: 0;
+      line-height: calc(32.8 / 18);
+    }
+
+    .feature__box--text {
+      line-height: calc(28.8 / 16);
+    }
+
+    .feature__figure {
+      margin-top: 56px;
+    }
+  }
+</style>

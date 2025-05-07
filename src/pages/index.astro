@@ -1,11 +1,55 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Fv from '../components/layouts/Fv.astro';
+import * as Components from '../components/layouts/Home';
 ---
 
 <Layout>
-	<Welcome />
+  <main class="main">
+    <Fv />
+    <div class="fade-wrapper">
+      <Components.Voice />
+      <Components.Profile />
+      <Components.Worries />
+      <Components.Feature />
+      <Components.Members />
+      <Components.Price />
+      <Components.Cta />
+      <Components.Flow />
+      <Components.Qa />
+      <Components.Access />
+      <Components.Cta />
+    </div>
+  </main>
 </Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.fade-wrapper', {
+    scrollTrigger: {
+      trigger: '.fade-wrapper',
+      start: 'top 90%',
+      toggleActions: 'play none none none',
+    },
+    opacity: 0,
+    y: 20,
+    duration: 1,
+    ease: 'power2.out',
+  });
+</script>
+
+<style>
+  .main {
+    padding-top: 120px;
+  }
+
+  @media (max-width: 960px) {
+    .main {
+      padding-top: 68px;
+    }
+  }
+</style>

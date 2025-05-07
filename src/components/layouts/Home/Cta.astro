@@ -1,0 +1,327 @@
+---
+import ButtonCta from '../../elements/Button/ButtonCta.astro';
+
+import { Image } from 'astro:assets';
+import ctaTextImage from '../../../assets/images/index/cta/cta_text.png';
+---
+
+<section class="cta">
+  <div class="cta__inner inner-primary">
+    <div class="cta__box">
+      <div class="cta__box--inner">
+        <h2 class="cta__box--heading2">期間限定無料体験キャンペーン</h2>
+        <div class="cta__box--body">
+          <div class="cta__box--body--wrap">
+            <div class="cta__box--body--course">
+              <div class="cta__box--body--course--first">
+                <Image src={ctaTextImage} alt={''} />
+              </div>
+              <p class="cta__box--body--course--text">体験コース　1回60分</p>
+            </div>
+            <div class="cta__box--body--price">
+              <div class="cta__box--body--price--usually">
+                <div class="cta__box--body--price--usually--wrap">
+                  <p class="cta__box--body--price--usually--text">通常価格</p>
+                  <p class="cta__box--body--price--usually--fee">
+                    <span class="cta__box--body--price--usually--fee--text"
+                      >¥12,000</span
+                    >
+                    <span class="cta__box--body--price--usually--fee--yen"
+                      >税込</span
+                    >
+                  </p>
+                </div>
+                <div class="cta__box--body--price--usually--arrows">
+                  <div class="cta__box--body--price--usually--arrow"></div>
+                </div>
+                <p class="cta__box--body--price--usually--limited">
+                  <span class="cta__box--body--price--usually--limited--yen"
+                    >￥</span
+                  >
+                  <span class="cta__box--body--price--usually--limited--fee"
+                    >０</span
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="cta__box--body--campaign">
+              <div class="cta__box--body--campaign--label">
+                <p class="cta__box--body--campaign--label--text">
+                  キャンペーン期間
+                </p>
+              </div>
+              <div class="cta__box--body--campaign--date">
+                <p class="cta__box--body--campaign--date--text">
+                  12月1日（月）～12月30日（金）
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="cta__box--body--button">
+            <ButtonCta href="#" label="２分で完了！LINEで予約する" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: 96px;
+    background-image: url(src/assets/images/index/cta/cta_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .cta__box {
+    max-width: 1060px;
+    max-width: calc(1060px + 10px * 2);
+    width: 100%;
+    margin-inline: auto;
+    padding-block: 64px;
+    padding-inline: 10px;
+    border: 1px solid var(--borderPrimary);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .cta__box--heading2 {
+    max-width: 882px;
+    width: 100%;
+    margin-inline: auto;
+    text-align: center;
+    font-size: 40px;
+    font-size: clamp(1.25rem, 0.81rem + 1.88vw, 2.5rem);
+    font-weight: 600;
+    line-height: calc(60 / 40);
+    letter-spacing: 0.15em;
+    color: var(--textSecondary);
+    border-top: 1px solid var(--borderPrimary);
+    border-bottom: 1px solid var(--borderPrimary);
+    padding-top: 20px;
+    padding-bottom: 16px;
+  }
+
+  .cta__box--body {
+    position: relative;
+    margin-top: 120px;
+    max-width: 606px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .cta__box--body--course--first {
+    position: absolute;
+    top: -80px;
+    right: 0;
+    width: 236px;
+  }
+
+  .cta__box--body--course--text {
+    font-size: 28px;
+    font-size: clamp(1rem, 0.736rem + 1.13vw, 1.75rem);
+    line-height: 1;
+    letter-spacing: 0.15em;
+  }
+
+  .cta__box--body--price--usually {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+  }
+
+  .cta__box--body--price--usually--text {
+    font-size: 24px;
+    font-size: clamp(1rem, 0.824rem + 0.75vw, 1.5rem);
+    line-height: 1;
+  }
+
+  .cta__box--body--price--usually--fee {
+    margin-top: 20px;
+  }
+
+  .cta__box--body--price--usually--fee--text {
+    font-size: 40px;
+    font-size: clamp(1.5rem, 1.148rem + 1.5vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .cta__box--body--price--usually--fee--yen {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .cta__box--body--price--usually--arrows {
+    position: absolute;
+    top: 0;
+    left: 50%;
+  }
+
+  .cta__box--body--price--usually--arrow {
+    position: relative;
+  }
+
+  .cta__box--body--price--usually--arrow::before,
+  .cta__box--body--price--usually--arrow::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    width: 30px;
+    height: 30px;
+    border-right: 1px solid var(--borderPrimary);
+    border-bottom: 1px solid var(--borderPrimary);
+    transform: rotate(-45deg);
+  }
+  .cta__box--body--price--usually--arrow::before {
+    left: -20px;
+  }
+  .cta__box--body--price--usually--arrow::after {
+    left: -40px;
+  }
+  .cta__box--body--price--usually--limited {
+    position: absolute;
+    top: -60px;
+    right: 30px;
+    color: var(--textSecondary);
+  }
+
+  .cta__box--body--price--usually--limited--yen {
+    font-size: 72px;
+    font-size: clamp(2.5rem, 1.796rem + 3vw, 4.5rem);
+    line-height: calc(120 / 72);
+    letter-spacing: -0.475em;
+  }
+
+  .cta__box--body--price--usually--limited--fee {
+    font-size: 160px;
+    font-size: clamp(4.5rem, 2.563rem + 8.26vw, 10rem);
+    line-height: 1;
+    letter-spacing: -0.115em;
+  }
+
+  .cta__box--body--campaign {
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cta__box--body--campaign--label--text {
+    padding: 9px 16px;
+    text-align: center;
+    font-size: 18px;
+    line-height: calc(24 / 18);
+    letter-spacing: 0.1em;
+    border: 1px solid var(--borderSecondary);
+  }
+
+  .cta__box--body--campaign--date--text {
+    font-size: 20px;
+    font-size: clamp(1rem, 0.912rem + 0.38vw, 1.25rem);
+    line-height: calc(24 / 20);
+  }
+
+  .cta__box--body--button {
+    position: relative;
+    margin-top: 52px;
+    max-width: 600px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  @media (max-width: 960px) {
+    .cta__box--body--wrap {
+      max-width: 80%;
+      margin-inline: auto;
+    }
+
+    .cta__box--body--price--usually--limited {
+      right: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cta__box--body--button {
+      margin-top: 32px;
+      max-width: 295px;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .cta {
+      padding-block: 56px;
+      background-image: url(src/assets/images/index/cta/cra_bg-sp.png);
+    }
+
+    .cta__box {
+      padding-block: 40px;
+    }
+
+    .cta__box--heading2 {
+      padding-block: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .cta__box--body {
+      margin-top: 78px;
+    }
+
+    .cta__box--body--wrap {
+      max-width: 225px;
+      margin-inline: auto;
+    }
+
+    .cta__box--body--course--first {
+      top: -56px;
+      width: 124px;
+    }
+
+    .cta__box--body--price--usually--arrows {
+      top: -16px;
+      left: 55%;
+    }
+
+    .cta__box--body--price--usually--arrow::before,
+    .cta__box--body--price--usually--arrow::after {
+      width: 16px;
+      height: 16px;
+    }
+    .cta__box--body--price--usually--arrow::after {
+      left: -30px;
+    }
+
+    .cta__box--body--price--usually--limited {
+      top: -14px;
+      right: 6px;
+    }
+
+    .cta__box--body--price--usually--fee {
+      margin-top: 0;
+    }
+
+    .cta__box--body--price--usually--fee--text {
+      line-height: calc(36 / 24);
+    }
+
+    .cta__box--body--price--usually--fee--yen {
+      display: none;
+    }
+
+    .cta__box--body--campaign {
+      flex-direction: column;
+      align-items: baseline;
+      margin-top: 32px;
+    }
+
+    .cta__box--body--campaign--label--text {
+      font-size: 14px;
+      padding: 5px 6px;
+    }
+
+    .cta__box--body--campaign--date--text {
+      letter-spacing: 0em;
+    }
+  }
+</style>

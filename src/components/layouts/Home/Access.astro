@@ -1,0 +1,167 @@
+---
+import TitleSecondary from '../../elements/Title/TitleSecondary.astro';
+---
+
+<section id="access" class="access">
+  <div class="access__inner inner-primary">
+    <div class="access__head inner-primary">
+      <TitleSecondary title="ACCESS" subTitle="アクセス" />
+    </div>
+    <div class="access__content">
+      <div class="access__body inner-primary">
+        <div class="access__body--head">
+          <h3 class="access__body--head--heading3">MELIA FITNESS</h3>
+          <p class="access__body--head--text">
+            パーソナルトレーニングジム メリアフィットネス
+          </p>
+        </div>
+        <div class="access__body--detail">
+          <p>
+            〒170-6045<br />東京都豊島区東池袋3-1-1 サンシャイン60 45階
+          </p>
+          <p>JR池袋駅より徒歩５分</p>
+          <p>TEL 00-0000-0000</p>
+          <p>営業時間　10：00～22：00</p>
+        </div>
+      </div>
+      <div class="access__map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.868560150898!2d139.71561907578985!3d35.729450972571755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b15d9f609c1%3A0x5c3747cb138c4762!2z44K144O844OW44Kz44O844OXIOaxoOiii-OCteODs-OCt-ODo-OCpOODszYw!5e0!3m2!1sja!2sjp!4v1743738382197!5m2!1sja!2sjp"
+          width="600"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .access {
+    padding-block: 96px;
+  }
+
+  .access__content {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .access__body {
+    max-width: calc((390 / 1060) * 100%);
+    width: 100%;
+  }
+	
+  .access__body--head--heading3 {
+    font-size: 24px;
+    font-size: clamp(1.125rem, 0.695rem + 0.89vw, 1.5rem);
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+
+  .access__body--head--text {
+    margin-top: 16px;
+    line-height: calc(24 / 16);
+    letter-spacing: 0.01em;
+    font-size: clamp(0.875rem, 0.732rem + 0.3vw, 1rem);
+  }
+
+  .access__body--detail {
+    margin-top: 40px;
+  }
+
+  .access__body--detail p {
+    letter-spacing: 0.1em;
+  }
+
+  .access__body--detail p:nth-child(1) {
+    line-height: calc(32 / 16);
+  }
+  .access__body--detail p:nth-child(2) {
+    line-height: 1;
+    margin-top: 32px;
+  }
+  .access__body--detail p:nth-child(3) {
+    line-height: 1;
+    margin-top: 40px;
+  }
+  .access__body--detail p:nth-child(4) {
+    line-height: 1;
+    margin-top: 40px;
+  }
+
+  .access__map {
+    max-width: calc((520 / 1060) * 100%);
+    width: 100%;
+  }
+
+  .access__map iframe {
+    width: 520px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 520 / 390;
+  }
+
+  @media (max-width: 768px) {
+    .access__content {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .access__body,
+    .access__map {
+      max-width: 80%;
+      margin-inline: auto;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .access {
+      margin-block: 56px;
+    }
+
+    .access__content {
+      margin-top: 40px;
+    }
+
+    .access__body,
+    .access__map {
+      max-width: 100%;
+    }
+
+    .access__body--head--heading3 {
+      line-height: calc(27 / 18);
+    }
+
+    .access__body--head--text {
+      line-height: calc(21 / 14);
+    }
+
+    .access__body--detail {
+      margin-top: 20px;
+    }
+
+    .access__body--detail p:nth-child(1),
+    .access__body--detail p:nth-child(2),
+    .access__body--detail p:nth-child(3),
+    .access__body--detail p:nth-child(4) {
+      line-height: calc(28.8 / 16);
+    }
+
+    .access__body--detail p:nth-child(1) {
+      line-height: calc(28.8 / 16);
+    }
+
+    .access__body--detail p:nth-child(2) {
+      margin-top: 12px;
+    }
+    .access__body--detail p:nth-child(3) {
+      margin-top: 12px;
+    }
+    .access__body--detail p:nth-child(4) {
+      margin-top: 12px;
+    }
+  }
+</style>

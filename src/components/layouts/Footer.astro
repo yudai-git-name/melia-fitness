@@ -1,0 +1,204 @@
+---
+const footerItems = [
+  {
+    title: 'OWNER’S PROFILE',
+    link: '#profile',
+  },
+  {
+    title: 'FEATURE',
+    link: '#feature',
+  },
+  {
+    title: 'MEMBER’S VOICE',
+    link: '#members',
+  },
+  {
+    title: 'PRICE',
+    link: '#price',
+  },
+  {
+    title: 'Q&A',
+    link: '#qa',
+  },
+  {
+    title: 'ACCESS',
+    link: '#access',
+  },
+];
+
+import { Image } from 'astro:assets';
+
+import logo from '../../assets/images/_common/logo/logo.png';
+import iconYoutube from '../../assets/images/_common/icon/icon_youtube.svg';
+import iconX from '../../assets/images/_common/icon/icon_x.svg';
+import iconInstagram from '../../assets/images/_common/icon/icon_instagram.svg';
+---
+
+<footer class="footer">
+  <div class="footer__inner inner-fourth">
+    <div class="footer__content">
+      <div class="footer__logo">
+        <Image src={logo} alt={''} />
+      </div>
+      <div class="footer__nav">
+        <ul class="footer__nav--items">
+          {
+            footerItems.map((footerItem) => (
+              <li class="footer__nav--item">
+                <a href={footerItem.link}>{footerItem.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="footer__nav--sns">
+          <div class="footer__nav--sns--items">
+            <div class="footer__nav--sns--item">
+              <a href="">
+                <Image src={iconYoutube} alt={''} />
+              </a>
+            </div>
+            <div class="footer__nav--sns--item">
+              <a href="">
+                <Image src={iconX} alt={''} />
+              </a>
+            </div>
+            <div class="footer__nav--sns--item">
+              <a href="">
+                <Image src={iconInstagram} alt={''} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__copy-right">
+      <p>
+        このサイトはMELINDA様のご協力のもと作成したコーディング用の練習課題です。実在の人物・団体とは関係ありません。
+      </p>
+      <p>&copy; 2021 MELIA FITNESS</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: 48px;
+    padding-bottom: 40px;
+    background-color: var(--bgTertiary);
+  }
+
+  .footer__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer__logo {
+    width: 130px;
+  }
+
+  .footer__nav--items {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+	.footer__nav--item:hover a {
+		opacity: 0.8;
+	}
+
+  .footer__nav--item a {
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+
+  .footer__nav--sns {
+    margin-top: 40px;
+  }
+
+  .footer__nav--sns--items {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
+	.footer__nav--sns--item:hover a {
+		transform: rotate(360deg);
+		transition: all 0.5s ease;
+	}
+
+  .footer__copy-right {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer__copy-right p:nth-child(1) {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .footer__copy-right p:nth-child(2) {
+    font-size: 12px;
+    line-height: calc(18 / 12);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 1016px) {
+    .footer__copy-right {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .footer__content {
+      flex-direction: column;
+    }
+
+    .footer__nav {
+      margin-top: 60px;
+    }
+
+    .footer__nav--sns--items {
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .footer__nav--items {
+        flex-direction: column;
+      }
+    }
+  }
+
+  @media (max-width: 599px) {
+    .footer {
+      padding-top: 32px;
+      padding-bottom: 28px;
+    }
+
+    .footer__logo {
+      width: 76px;
+    }
+
+    .footer__nav {
+      margin-top: 32px;
+    }
+
+    .footer__nav--items {
+      gap: 24px;
+    }
+
+    .footer__nav--sns {
+      margin-top: 32px;
+    }
+
+    .footer__copy-right {
+      margin-top: 40px;
+      gap: 40px;
+    }
+  }
+</style>

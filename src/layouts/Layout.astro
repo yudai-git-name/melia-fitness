@@ -1,22 +1,372 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import 'destyle.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+import Header from '../components/layouts/Header.astro';
+import DrawerMenu from '../components/layouts/DrawerMenu.astro';
+import Footer from '../components/layouts/Footer.astro';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+		<meta name=”robots” content=”noindex”/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>melia fitness</title>
+		<meta name="description" content="melia fitnessの公式サイトです。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header />
+    <DrawerMenu />
+    <slot />
+    <Footer />
+  </body>
+
+  <script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    //ドロワーメニュー
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOMContentLoaded: スクリプトが読み込まれました');
+
+      const button = document.querySelector('.js-drawer-button');
+      const menu = document.querySelector('.js-drawer-menu');
+      const overlay = document.querySelector('.js-drawer-menu-overlay');
+      const list = document.querySelector('.js-drawer-menu__items');
+      const drawerLinks = document.querySelectorAll('.drawer-menu__item a');
+
+      if (!(button && menu && overlay && list)) {
+        console.warn('要素が見つかりませんでした');
+        return;
+      }
+
+      let isMenuOpen = false;
+
+      const toggleMenu = () => {
+        isMenuOpen = !isMenuOpen;
+
+        button.classList.toggle('is-active', isMenuOpen);
+        menu.classList.toggle('is-active', isMenuOpen);
+        overlay.classList.toggle('is-active', isMenuOpen);
+        list.classList.toggle('is-active', isMenuOpen);
+
+        button.setAttribute('aria-expanded', isMenuOpen.toString());
+        button.setAttribute(
+          'aria-label',
+          isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'
+        );
+        list.setAttribute('aria-hidden', (!isMenuOpen).toString());
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+      };
+
+      const handleKeydown = (e: KeyboardEvent) => {
+        if (window.innerWidth >= 600) return;
+        if (e.key === 'Escape') toggleMenu();
+      };
+
+      button.addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', handleKeydown);
+
+      drawerLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          if (isMenuOpen) {
+            toggleMenu();
+          }
+        });
+      });
+    });
+
+    //フェードインアニメーション
+    gsap.utils.toArray('.js-fadeIn').forEach((e) => {
+      gsap.from(e, {
+        autoAlpha: 0,
+        duration: 1,
+        ease: 'sine.out',
+        scrollTrigger: {
+          trigger: e,
+          start: 'top 60%',
+          toggleActions: 'play none none none',
+        },
+      });
+    });
+
+    //一文字ずつフェードイン
+    document.addEventListener('DOMContentLoaded', function () {
+      var set = 100; // スクロール位置のオフセット値
+      var boxTop = [];
+      var current = -1;
+
+      // 各セクションの位置を取得
+      document.querySelectorAll('.position-now').forEach(function (el, i) {
+        boxTop[i] = el.getBoundingClientRect().top + window.pageYOffset;
+      });
+
+      // スクロール位置に応じてリンクを切り替える
+      function changeBox(secNum) {
+        if (secNum !== current) {
+          current = secNum;
+
+          // 全てのリンクからアクティブクラスを削除
+          document
+            .querySelectorAll('.header__nav--item a')
+            .forEach(function (el) {
+              el.classList.remove('link-current');
+            });
+
+          // 現在のリンクにアクティブクラスを追加
+          if (secNum === 0) {
+            const topLink = document.getElementById('js-top-link');
+            if (topLink) topLink.classList.add('link-current');
+          } else if (secNum === 1) {
+            const aboutLink = document.getElementById('js-about-link');
+            if (aboutLink) aboutLink.classList.add('link-current');
+          } else if (secNum === 2) {
+            const serviceLink = document.getElementById('js-service-link');
+            if (serviceLink) serviceLink.classList.add('link-current');
+          } else if (secNum === 3) {
+            const flowLink = document.getElementById('js-flow-link');
+            if (flowLink) flowLink.classList.add('link-current');
+          } else if (secNum === 4) {
+            const companyLink = document.getElementById('js-company-link');
+            if (companyLink) companyLink.classList.add('link-current');
+          }
+        }
+      }
+
+      // スクロールイベントを監視
+      window.addEventListener('scroll', function () {
+        var scrollPosition = window.pageYOffset;
+
+        for (var i = boxTop.length - 1; i >= 0; i--) {
+          if (scrollPosition > boxTop[i] - set) {
+            changeBox(i);
+            break;
+          }
+        }
+      });
+
+      // スムーススクロールの設定
+      var offsetHeight = 80; // ヘッダー分のオフセット
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          var href = link.getAttribute('href');
+          var target = document.querySelector(
+            href === '#' || href === '' ? 'html' : href
+          );
+
+          if (target) {
+            var position =
+              target.getBoundingClientRect().top +
+              window.pageYOffset -
+              offsetHeight;
+
+            // スムーススクロール
+            window.scrollTo({
+              top: position,
+              behavior: 'smooth',
+            });
+          }
+        });
+      });
+    });
+    function u(e) {
+      const r = e.textContent
+        .split('')
+        .map((n) => `<span>${n}</span>`)
+        .join('');
+      e.innerHTML = r;
+    }
+    document.querySelectorAll('.js-one-character').forEach((e) => {
+      u(e),
+        gsap.fromTo(
+          e.querySelectorAll('span'),
+          { autoAlpha: 0, x: -20 },
+          {
+            autoAlpha: 1,
+            x: 0,
+            stagger: 0.1,
+            duration: 1,
+            ease: 'power1.out',
+            scrollTrigger: {
+              trigger: e,
+              start: 'top 60%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+    });
+
+    // 順番ずつアニメーション
+    function fadeInElements({
+      targets = '.js-order',
+      trigger = null,
+      y = 20,
+      duration = 1,
+      stagger = 0.2,
+      start = 'top 80%',
+      once = true,
+    } = {}) {
+      gsap.from(targets, {
+        scrollTrigger: {
+          trigger: trigger || targets,
+          start: start,
+          toggleActions: once
+            ? 'play none none none'
+            : 'restart none none none',
+        },
+        opacity: 0,
+        y: y,
+        duration: duration,
+        ease: 'power2.out',
+        stagger: stagger,
+      });
+    }
+    // flow用
+    fadeInElements({
+      targets: '.flow__box.js-order',
+      trigger: '.flow__boxes',
+    });
+  </script>
+
+  <style is:global>
+    :root {
+      --fontBase: '游明朝体', 'Yu Mincho', YuMincho, 'ヒラギノ明朝 Pro',
+        'Hiragino Mincho Pro', 'MS P明朝', 'MS PMincho', serif;
+      --fontLore: 'Lora', serif;
+      --fontAllura: 'Allura', cursive;
+
+      --textPrimary: #393327;
+      --textSecondary: #8b6c3a;
+      --textTertiary: #ffffff;
+
+      --bgPrimary: #ffffff;
+      --bgSecondary: #393327;
+      --bgTertiary: #fafafa;
+
+      --borderPrimary: #8b6c3a;
+      --borderSecondary: #393327;
+      --borderTertiary: #ffffff;
+      --borderFourth: #e8e8e8;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    body {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      font-family: var(--fontBase);
+      color: var(--textPrimary);
+      background-color: var(--bgPrimary);
+      letter-spacing: 0.05em;
+    }
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    li,
+    ol {
+      list-style: none;
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      vertical-align: bottom;
+      font-style: italic;
+      background-repeat: no-repeat;
+      background-size: cover;
+      shape-margin: 0.75rem;
+    }
+
+    button {
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .inner-primary {
+      max-width: calc(1060px + 40px * 2);
+      width: 100%;
+      margin-inline: auto;
+      padding-inline: 40px;
+    }
+    .inner-secondary {
+      max-width: calc(878px + 40px * 2);
+      width: 100%;
+      margin-inline: auto;
+      padding-inline: 40px;
+    }
+    .inner-Tertiary {
+      max-width: calc(815px + 40px * 2);
+      width: 100%;
+      margin-inline: auto;
+      padding-inline: 40px;
+    }
+    .inner-fourth {
+      max-width: calc(1096px + 40px * 2);
+      width: 100%;
+      margin-inline: auto;
+      padding-inline: 40px;
+    }
+
+    .br-sp-visible,
+    .br-tab-xs-visible {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .br-tab-xs-visible {
+        display: block;
+      }
+    }
+
+    @media (max-width: 599px) {
+      .inner-primary {
+        max-width: calc(1060px + 20px * 2);
+        padding-inline: 20px;
+      }
+      .inner-secondary {
+        max-width: calc(878px + 20px * 2);
+        width: 100%;
+        margin-inline: auto;
+        padding-inline: 20px;
+      }
+      .inner-Tertiary {
+        max-width: calc(815px + 20px * 2);
+        width: 100%;
+        margin-inline: auto;
+        padding-inline: 20px;
+      }
+      .inner-fourth {
+        max-width: calc(1096px + 20px * 2);
+        padding-inline: 20px;
+      }
+
+      .br-sp-visible {
+        display: block;
+      }
+    }
+  </style>
+</html>

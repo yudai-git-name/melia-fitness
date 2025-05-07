@@ -1,0 +1,177 @@
+---
+const voices = [
+  {
+    title: '理想的なカラダになれました！',
+    text: 'マンツーマンの指導を受けることができ、自分のなりたい身体に合ったトレーニングができてとても良かったです。<br />2か月で理想の体型になることができました！',
+    name: '38歳 会社員 女性',
+    image: VoiceImage01,
+    alt: 'alt01',
+  },
+  {
+    title: 'リバウンドせずに体型維持できています！',
+    text: '4か月前に目標の体重になってからなってからリバウンドもなく、今でもボディメイクを楽しんで続けられています。',
+    name: '42歳 会社経営 女性',
+    image: VoiceImage02,
+    alt: 'alt02',
+  },
+  {
+    title: '周りから“キレイになった”と言われます！',
+    text: 'トレーニングをしてメリハリのある体になると、家族や友人から「とてもキレイになった」と褒めてもらえるように。<br />ボディメイクをきっかけに自信が持てるようになりました。',
+    name: '32歳 専業主婦 女性',
+    image: VoiceImage03,
+    alt: 'alt03',
+  },
+];
+
+import { Image } from 'astro:assets';
+import VoiceImage01 from '../../../assets/images/index/voice/voice01.png';
+import VoiceImage02 from '../../../assets/images/index/voice/voice02.png';
+import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
+---
+
+<section class="voice">
+  <div class="voice__inner inner-primary">
+    <div class="voice__head">
+      <h2 class="voice__head--heading2">
+        トレーニングを受けた会員様からこんな声が届いています。
+      </h2>
+    </div>
+    <div class="voice__boxes">
+      {
+        voices.map((voice) => (
+          <div class="voice__box">
+            <div class="voice__box--body">
+              <h3 class="voice__box--body--heading3">{voice.title}</h3>
+              <div class="voice__box--body--text-wrap">
+                <p class="voice__box--body--text" set:html={voice.text} />
+              </div>
+              <p class="voice__box--body--name">{voice.name}</p>
+            </div>
+            <div class="voice__box--image-wrap">
+              <Image
+                src={voice.image}
+                class="voice__box--image"
+                alt={voice.alt}
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .voice {
+    margin-top: 96px;
+  }
+
+  .voice__head {
+    text-align: center;
+  }
+
+  .voice__head--heading2 {
+    font-size: 32px;
+    font-size: clamp(1.25rem, 0.986rem + 1.13vw, 2rem);
+    line-height: calc(48 / 32);
+    letter-spacing: 0.1em;
+    color: var(--textSecondary);
+    font-weight: 600;
+  }
+
+  .voice__boxes {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .voice__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .voice__box:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .voice__box--body {
+    max-width: calc((513 / 1060) * 100%);
+    width: 100%;
+  }
+
+  .voice__box--body--heading3 {
+    font-size: clamp(1.125rem, 0.993rem + 0.56vw, 1.5rem);
+    line-height: calc(36 / 24);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .voice__box--body--text-wrap {
+    margin-top: 20px;
+  }
+
+  .voice__box--body--text {
+    line-height: 32px;
+  }
+
+  .voice__box--body--name {
+    margin-top: 17px;
+    text-align: right;
+    font-size: clamp(0.875rem, 0.831rem + 0.19vw, 1rem);
+  }
+
+  .voice__box--image-wrap {
+    max-width: calc((450 / 1060) * 100%);
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .voice__box {
+      flex-direction: column-reverse;
+    }
+
+    .voice__box:nth-child(even) {
+      flex-direction: column-reverse;
+    }
+
+    .voice__box--body {
+      margin-top: 23px;
+    }
+
+    .voice__box--body,
+    .voice__box--image-wrap {
+      max-width: 80%;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .voice {
+      margin-top: 56px;
+    }
+
+		.voice__boxes {
+			margin-top: 40px;
+			gap: 40px;
+		}
+
+		.voice__box--body--text-wrap {
+			margin-top: 12px;
+		}
+
+    .voice__box--body,
+    .voice__box--image-wrap {
+      max-width: 100%;
+    }
+
+		.voice__box--body--text {
+			line-height: calc(28.8 / 16);
+		}
+
+		.voice__box--body--name {
+			text-align: left;
+			margin-top: 12px;
+		}
+  }
+</style>

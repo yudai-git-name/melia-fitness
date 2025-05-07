@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import fvImagePc from '../../assets/images/index/fv/fv.png';
+import fvImageSp from '../../assets/images/index/fv/fv_sp.png';
+---
+
+<div class="fv">
+  <div class="fv__content">
+    <h2 class="fv__heading2">
+      週一<small>のトレーニングで</small><br
+        class="br-tab-xs-visible"
+      />人に見せたくなる<br />カラダ<small>をつくる。</small>
+    </h2>
+    <p class="fv__text">
+      一流俳優・モデルを指導してきた<br
+        class="br-sp-visible"
+      />本物のパーソナルトレーニング
+    </p>
+  </div>
+  <div class="fv__image-wrap">
+    <picture>
+      <source
+        srcset={fvImageSp.src}
+        media="(max-width: 768px)"
+        class="fv__image"
+      />
+      <Image src={fvImagePc} class="fv__image" alt="fv01" />
+    </picture>
+  </div>
+</div>
+
+<style>
+  .fv {
+    position: relative;
+    height: 680px;
+  }
+
+  .fv__content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc((191 / 1440) * 100vw);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .fv__heading2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .fv__heading2 small {
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+  }
+
+  .fv__text {
+    font-size: 1.375rem;
+    line-height: calc(33 / 24);
+  }
+
+  .fv__image-wrap {
+    height: 680px;
+  }
+
+  picture {
+    height: inherit;
+    object-fit: cover;
+  }
+
+  .fv__image {
+    height: inherit;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .fv__content {
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      gap: 12px;
+    }
+
+    .fv__heading2 {
+      text-align: center;
+    }
+    .fv__text {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .fv__heading2 {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .fv__heading2 small {
+      font-size: 22px;
+    }
+
+    .fv__text {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+</style>

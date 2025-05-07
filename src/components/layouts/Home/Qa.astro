@@ -1,0 +1,188 @@
+---
+const qaItems = [
+  {
+    question: 'ダイエットをしたいのですが、どれくらいの効果がありますか？',
+    answer:
+      '個人差はありますが、週に1回のパーソナルトレーニングと自宅でのトレーニング、食生活を改善することで、２か月で効果を感じていただくことができます。',
+  },
+  {
+    question:
+      '運動をしたことがなく、体力に自信がありません。大丈夫でしょうか？',
+    answer:
+      'MELIA FITNESSは専属のトレーナーがマンツーマンでトレーニングのサポートをしております。また、無理なトレーニングはしないため、運動をしたことがなく、体力に自信がない方でも安心して取り組んでいただけます。',
+  },
+  {
+    question: 'リバウンドはしませんか？',
+    answer:
+      'リバウンドの原因は筋肉が落ちて基礎代謝が下がってしまうことが原因であると考えられています。<br />MELIA FITNESSのプログラムでは、確実に筋肉をつけられますので、リバウンドしにくい体になれます。',
+  },
+  {
+    question: '厳しい食事制限をする自信がありません。',
+    answer:
+      'MELIA FITNESSでは食事の選び方や食べ方など食事改善についてアドバイスを行っております。<br />厳しい食事制限はありませんのでご安心ください。',
+  },
+  {
+    question: 'トレーニングの際に必要なものはありますか？',
+    answer:
+      'トレーニングウェアとトレーニング時に使用するシューズをおもちください。<br />お持ちでない場合はレンタルをご用意しておりますのでご利用ください。',
+  },
+];
+
+import TitlePrimary from '../../elements/Title/TitlePrimary.astro';
+
+import { Image } from 'astro:assets';
+import GymPc from '../../../assets/images/index/qa/qa_gym-pc.png';
+import GymSp from '../../../assets/images/index/qa/qa_gym-sp.png';
+---
+
+<section id="qa" class="qa">
+  <div class="qa__inner inner-Tertiary">
+    <div class="qa__head">
+      <TitlePrimary title="Q&A" subTitle="よくあるご質問" />
+    </div>
+    <div class="qa__boxes">
+      {
+        qaItems.map((qaItem) => (
+          <div class="qa__box">
+            <div class="qa__box--q">
+              <span class="qa__box--q--icon">Q</span>
+              <h3 class="qa__box--q--heading3">{qaItem.question}</h3>
+            </div>
+            <div class="qa__box--a">
+              <span class="qa__box--a--icon">A</span>
+              <p class="qa__box--a--text" set:html={qaItem.answer} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="qa__figure js-gsap-ph-trg">
+    <figure class="qa__figure--image-wrap"></figure>
+    <picture>
+      <source srcset={GymSp.src} media="(max-width: 599px)" />
+      <Image src={GymPc} class="js-gsap-ph" alt={''} />
+    </picture>
+  </div>
+</section>
+
+<style>
+  .qa {
+    padding-top: 96px;
+  }
+
+  .qa__head {
+    text-align: center;
+  }
+
+  .qa__boxes {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .qa__box {
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--borderFourth);
+  }
+
+  .qa__box:nth-last-child(1) {
+    border-bottom: none;
+  }
+
+  .qa__box--q {
+    display: flex;
+    align-items: center;
+  }
+
+  .qa__box--q--icon {
+    width: 40px;
+    font-size: 20px;
+    font-family: var(--fontLore);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: var(--textSecondary);
+  }
+
+  .qa__box--q--heading3 {
+    width: calc(100% - 40px);
+    line-height: calc(32 / 16);
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+
+  .qa__box--a {
+    margin-top: 36px;
+    display: flex;
+    align-items: baseline;
+  }
+
+  .qa__box--a--icon {
+    width: 40px;
+    font-size: 20px;
+    font-family: var(--fontLore);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .qa__box--a--text {
+    width: calc(100% - 40px);
+    line-height: calc(32 / 16);
+    letter-spacing: 0.2em;
+  }
+
+  .qa__figure {
+    margin-top: calc(104px - 80px);
+  }
+
+  .qa__figure--image-wrap {
+  }
+
+  @media (max-width: 599px) {
+    .qa {
+      margin-top: 56px;
+    }
+
+    .qa__boxes {
+      margin-top: 40px;
+      gap: 24px;
+    }
+
+    .qa__box {
+      padding-bottom: 24px;
+    }
+
+    .qa__box--q {
+      align-items: baseline;
+    }
+
+    .qa__box--a {
+      margin-top: 12px;
+    }
+
+    .qa__box--q--icon {
+      width: 34px;
+      font-size: 16px;
+    }
+
+    .qa__box--q--heading3 {
+      width: calc(100% - 34px);
+      line-height: calc(28.8 / 16);
+    }
+
+    .qa__box--a--icon {
+      width: 34px;
+      font-size: 16px;
+    }
+
+    .qa__box--a--text {
+      width: calc(100% - 34px);
+      line-height: calc(28.8 / 16);
+    }
+
+    .qa__figure {
+      margin-top: calc(104px - 54px);
+    }
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+import TitlePrimary from '../../elements/Title/TitlePrimary.astro';
+---
+
+<section id="price" class="price">
+  <div class="price__inner">
+    <div class="price__head">
+      <TitlePrimary title="PRICE" subTitle="ご利用料金" />
+    </div>
+    <div class="price__content">
+      <p class="price__amount">
+        <span class="price__amount--monthly-fee">月額</span>
+        <span class="price__amount--yen">¥</span>
+        <span class="price__amount--fee">29,800</span>
+        <span class="price__amount--tax-included">税込</span>
+      </p>
+      <div class="price__texts">
+        <p class="price__texts--top">
+          週1で通うMELIA FITNESSの<br
+            class="br-tab-xs-visible"
+          />パーソナルトレーニング
+        </p>
+        <p class="price__texts--middle">
+          トレーナーとマンツーマンで理想的なボディメイクを目指します。
+        </p>
+        <p class="price__texts--bottom">※Kailaniご指名の場合は月額￥39,800</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .price {
+    padding-block: 96px;
+    background-image: url(src/assets/images/index/price/price_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .price__inner {
+    padding-inline: 20px;
+  }
+
+  .price__head {
+    text-align: center;
+  }
+
+  .price__content {
+    margin-top: 80px;
+    text-align: center;
+  }
+
+  .price__amount {
+    color: var(--textSecondary);
+  }
+
+  .price__amount--monthly-fee {
+    font-size: 40px;
+    font-size: clamp(1.375rem, 0.979rem + 1.69vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+
+  .price__amount--yen {
+    font-size: 64px;
+    font-size: clamp(2rem, 1.296rem + 3vw, 4rem);
+  }
+
+  .price__amount--fee {
+    font-size: 80px;
+    font-size: clamp(3.125rem, 2.465rem + 2.82vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+
+  .price__amount--tax-included {
+    font-size: 20px;
+    font-size: clamp(1rem, 0.912rem + 0.38vw, 1.25rem);
+  }
+
+  .price__texts {
+    margin-top: 36px;
+  }
+
+  .price__texts--top {
+    font-size: 24px;
+    font-size: clamp(1.125rem, 0.993rem + 0.56vw, 1.5rem);
+    font-weight: 600;
+    line-height: calc(36 / 24);
+    color: var(--textSecondary);
+    letter-spacing: 0.1em;
+  }
+
+  .price__texts--middle {
+    margin-top: 32px;
+    font-size: clamp(0.875rem, 0.831rem + 0.19vw, 1rem);
+    letter-spacing: 0.1em;
+    color: var(--textSecondary);
+  }
+
+  .price__texts--bottom {
+    margin-top: 32px;
+    font-size: 24px;
+    font-size: clamp(1rem, 0.824rem + 0.75vw, 1.5rem);
+    font-weight: 600;
+    line-height: calc(36 / 24);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 599px) {
+    .price {
+      padding-block: 56px;
+      background-image: url(src/assets/images/index/price/price-bg-sp.png);
+    }
+
+    .price__content {
+      margin-top: 40px;
+    }
+
+    .price__texts {
+      margin-top: 32px;
+    }
+  }
+</style>

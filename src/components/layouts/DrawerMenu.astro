@@ -1,0 +1,133 @@
+---
+const DrawerItems = [
+  {
+    title: 'OWNER’S PROFILE',
+    link: '#profile',
+  },
+  {
+    title: 'FEATURE',
+    link: '#feature',
+  },
+  {
+    title: 'MEMBER’S VOICE',
+    link: '#members',
+  },
+  {
+    title: 'PRICE',
+    link: '#price',
+  },
+  {
+    title: 'Q&A',
+    link: '#qa',
+  },
+  {
+    title: 'ACCESS',
+    link: '#access',
+  },
+];
+
+import { Image } from 'astro:assets';
+import iconYoutube from '../../assets/images/_common/icon/icon_youtube.svg';
+import iconX from '../../assets/images/_common/icon/icon_x.svg';
+import iconInstagram from '../../assets/images/_common/icon/icon_instagram.svg';
+---
+
+<div class="drawer-menu-overlay js-drawer-menu-overlay"></div>
+
+<div class="drawer-menu js-drawer-menu" aria-hidden="true">
+  <nav id="drawer-menu__nav" class="drawer-menu__nav js-drawer-menu__items">
+    <ul class="drawer-menu__items">
+      {
+        DrawerItems.map((DrawerItem) => (
+          <li class="drawer-menu__item">
+            <a href={DrawerItem.link}>{DrawerItem.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <div class="drawer-menu__sns">
+    <div class="drawer-menu__sns--items">
+      <div class="drawer-menu__sns--item">
+        <a href="">
+          <Image src={iconYoutube} alt={''} />
+        </a>
+      </div>
+      <div class="drawer-menu__sns--item">
+        <a href="">
+          <Image src={iconX} alt={''} />
+        </a>
+      </div>
+      <div class="drawer-menu__sns--item">
+        <a href="">
+          <Image src={iconInstagram} alt={''} />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .drawer-menu {
+    position: fixed;
+    top: 68px;
+    right: 0;
+    width: calc((250 / 375) * 100%);
+    height: 100svh;
+    padding-top: 56px;
+    z-index: 999;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s ease;
+  }
+
+  .drawer-menu.is-active {
+    opacity: 1;
+    visibility: visible;
+    width: calc((250 / 375) * 100%);
+    transition: 0.5s ease;
+  }
+
+  .drawer-menu-overlay {
+    position: fixed;
+    top: 68px;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100svh;
+    background: rgba(124, 124, 124, 0.233);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s ease;
+  }
+
+  .drawer-menu-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.5s ease;
+    z-index: 1;
+  }
+
+  .drawer-menu__items {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .drawer-menu__item a {
+    letter-spacing: 0.1em;
+  }
+
+  .drawer-menu__sns {
+    margin-top: 56px;
+  }
+
+  .drawer-menu__sns--items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+</style>

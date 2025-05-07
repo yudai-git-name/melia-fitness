@@ -1,0 +1,227 @@
+---
+const worriesItems = [
+  {
+    text: 'トレーニングをしても本当に痩せられるか不安。',
+    image: iconCheck,
+  },
+  {
+    text: 'トレーニングしたいけど時間がない。',
+    image: iconCheck,
+  },
+  {
+    text: '厳しい食事制限に耐えられるか分からない。',
+    image: iconCheck,
+  },
+  {
+    text: '一時的に痩せてもリバウンドしないか心配。',
+    image: iconCheck,
+  },
+  {
+    text: 'ダイエットに失敗してきたので続けられるか不安。',
+    image: iconCheck,
+  },
+];
+
+import { Image } from 'astro:assets';
+import iconCheck from '../../../assets/images/_common/icon/icon_check.svg';
+import worriesBgPc from '../../../assets/images/index/worries/worries_bg.png';
+import worriesBgSp from '../../../assets/images/index/worries/worries_bg-sp.png';
+---
+
+<section class="worries">
+  <div class="worries__inner">
+    <div class="worries__content">
+      <h2 class="worries__heading2">こんなお悩みありませんか？</h2>
+      <ul class="worries__items">
+        {
+          worriesItems.map((worriesItem) => (
+            <li class="worries__item">
+              <div class="worries__item--image-wrap">
+                <Image src={worriesItem.image} alt="" />
+              </div>
+              <span class="worries__item--text">{worriesItem.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="worries__image-wrap js-gsap-ph-trg">
+      <Image src={worriesBgPc} class="worries__image js-gsap-ph" alt="" />
+    </div>
+    <div class="worries__image-wrap-sp js-gsap-ph-trg">
+      <Image src={worriesBgSp} class="worries__image js-gsap-ph" alt="" />
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const gsapPhotoTargets = document.querySelectorAll('.js-gsap-ph-trg');
+
+  gsapPhotoTargets.forEach((gsapPhotoTarget) => {
+    const gsapPhotoTargetItem = gsapPhotoTarget.querySelector('.js-gsap-ph');
+
+    const gsapPhotoTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: gsapPhotoTarget,
+        start: 'top bottom',
+        end: 'center center',
+        scrub: 1,
+        // markers: true,
+      },
+    });
+
+    const gsapPhotoTL2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: gsapPhotoTarget,
+        start: 'top bottom',
+        end: 'top top',
+        scrub: 1,
+        // markers: true,
+      },
+    });
+
+    gsapPhotoTL.set(gsapPhotoTargetItem, {
+      filter: 'blur(20px) grayscale(1) brightness(1.5)',
+      scale: 1.4,
+    });
+
+    gsapPhotoTL
+      .to(gsapPhotoTargetItem, {
+        filter: 'blur(0px) grayscale(1) brightness(1.5)',
+      })
+      .to(gsapPhotoTargetItem, {
+        filter: 'blur(0px) grayscale(0) brightness(1)',
+      });
+
+    gsapPhotoTL2.to(gsapPhotoTargetItem, {
+      scale: 1,
+    });
+  });
+</script>
+
+<style>
+  .worries {
+    position: relative;
+    margin-top: 92px;
+    height: 480px;
+  }
+
+  .worries__content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc((279 / 1440) * 100%);
+    z-index: 10;
+  }
+
+  .worries__heading2 {
+    font-size: 24px;
+    font-size: clamp(1.25rem, 1.162rem + 0.38vw, 1.5rem);
+    line-height: calc(36 / 24);
+  }
+
+  .worries__items {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .worries__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .worries__item--image-wrap {
+    position: relative;
+    width: 24px;
+    z-index: 1;
+  }
+
+  .worries__item--text {
+    font-size: 18px;
+    font-size: clamp(1rem, 0.956rem + 0.19vw, 1.125rem);
+    line-height: calc(27 / 18);
+  }
+
+  .worries__image-wrap {
+    height: 480px;
+  }
+
+  .worries__image-wrap-sp {
+    display: none;
+  }
+
+  .worries__image {
+    height: inherit;
+    object-fit: cover;
+  }
+
+  @media (max-width: 960px) {
+    .worries__content {
+      left: 20px;
+    }
+
+    .worries__heading2 {
+      background-color: var(--bgTertiary);
+      width: fit-content;
+    }
+
+    .worries__image {
+      object-position: right;
+    }
+
+    .worries__item--text {
+      background-color: var(--bgTertiary);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .worries {
+      height: auto;
+      margin-top: 80px;
+    }
+
+    .worries__inner {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .worries__content {
+      padding-top: 40px;
+      padding-bottom: 56px;
+      padding-inline: 20px;
+      position: initial;
+      transform: none;
+      background-color: var(--bgTertiary);
+    }
+
+    .worries__items {
+      position: relative;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .worries__item {
+      align-items: flex-start;
+    }
+
+    .worries__image-wrap {
+      display: none;
+    }
+
+    .worries__image-wrap-sp {
+      display: block;
+    }
+
+    .worries__image {
+      height: 226px;
+    }
+  }
+</style>

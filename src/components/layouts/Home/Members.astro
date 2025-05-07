@@ -1,0 +1,176 @@
+---
+const membersItems = [
+  {
+    title: '引き締まったメリハリボディになれました！',
+    name: '43歳 会社員 女性',
+    text: `自己流のダイエットでは体重は落ちても、なぜか体型はだらしないままで、少し時間が経つとリバウンドをしてしまっていました。<br />MELIA FITNESSでマンツーマンのトレーニングを受けて、リバウンド知らずの引き締まった身体を維持できています。<br />週1のトレーニングで無理なく通うことができ、楽しく続けることができています。<br />MELIA FITNESSを選んで良かったです！`,
+    image: membersImage01,
+    alt: 'alt01',
+  },
+  {
+    title: 'ボディメイクが楽しくなりました！',
+    name: '36歳 公務員 女性',
+    text: `前からジムに通っていましたが、ダイエットはいつも途中で挫折してしまっていたのでプロのトレーナーの方から教わりたいと思い、MELIA FITNESSを利用しました。<br />自分の目指している身体に合わせて、トレーニングや食生活について提案をしてくださるので、理想的なボディメイクができたと思っています。<br />今ではボディメイクをとても楽しく感じるようになりました。`,
+    image: membersImage02,
+    alt: 'alt02',
+  },
+  {
+    title: 'ダイエットに成功しました！',
+    name: '32歳 会社員 女性',
+    text: `運動をほぼしたことがなく、トレーニングは厳しいものというイメージがあり、最初は不安でしたが、トレーナーの方に丁寧にトレーニング方法を教えていただくことができ、無理なく楽しく取り組めました。<br />２か月で目標体重になり、身体も引き締まり、ダイエットに成功しました。<br />ダイエットに成功すると同時に、健康な身体を手に入れることが出来たと思います。`,
+    image: membersImage03,
+    alt: 'alt03',
+  },
+];
+
+import TitleSecondary from '../../elements/Title/TitleSecondary.astro';
+
+import { Image } from 'astro:assets';
+import membersImage01 from '../../../assets/images/index/members/members_image01.png';
+import membersImage02 from '../../../assets/images/index/members/members_image02.png';
+import membersImage03 from '../../../assets/images/index/members/members_image03.png';
+---
+
+<section id="members" class="members">
+  <div class="members__inner inner-primary">
+    <div class="members__head">
+      <TitleSecondary title="MEMBER’S VOICE" subTitle="会員様の声" />
+    </div>
+    <div class="members__boxes">
+      {
+        membersItems.map((membersItem) => (
+          <div class="members__box js-fadeIn">
+            <div class="members__box--body">
+              <h3 class="members__box--body--heading3">{membersItem.title}</h3>
+              <p class="members__box--body--name">{membersItem.name}</p>
+              <div class="members__box--body--text-wrap">
+                <p
+                  class="members__box--body--text"
+                  set:html={membersItem.text}
+                />
+              </div>
+            </div>
+            <div class="members__box--image">
+              <Image src={membersItem.image} alt={membersItem.alt} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .members {
+    margin-top: -66px;
+    padding-top: calc(96px + 66px);
+    padding-bottom: 96px;
+    background-image: url(src/assets/images/index/members/members_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .members__boxes {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .members__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .members__box:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+
+  .members__box--body {
+    max-width: calc((539 / 1060) * 100%);
+    width: 100%;
+  }
+
+  .members__box--body--heading3 {
+    font-size: 24px;
+    font-size: clamp(1.125rem, 0.993rem + 0.56vw, 1.5rem);
+    font-weight: 600;
+    line-height: calc(36 / 24);
+    color: var(--textSecondary);
+    letter-spacing: 0.1em;
+  }
+
+  .members__box--body--name {
+    margin-top: 20px;
+    font-size: clamp(0.875rem, 0.831rem + 0.19vw, 1rem);
+  }
+
+  .members__box--body--text-wrap {
+    margin-top: 24px;
+  }
+
+  .members__box--body--text {
+    line-height: calc(32 / 16);
+  }
+
+  .members__box--image {
+    max-width: calc((450 / 1060) * 100%);
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .members__box {
+      flex-direction: column-reverse;
+    }
+
+    .members__box:nth-child(odd) {
+      flex-direction: column-reverse;
+    }
+
+    .members__box--body,
+    .members__box--image {
+      max-width: 80%;
+    }
+
+    .members__box--body {
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .members {
+      padding-top: calc(56px + 66px);
+      padding-bottom: 56px;
+    }
+
+    .members__boxes {
+      margin-top: 40px;
+      gap: 40px;
+    }
+
+    .members__box--body,
+    .members__box--image {
+      max-width: 100%;
+    }
+
+    .members__box--body--heading3 {
+      line-height: calc(27 / 18);
+    }
+
+    .members__box--body--name {
+      margin-top: 12px;
+      line-height: calc(21 / 14);
+    }
+
+    .members__box--body--text-wrap {
+      margin-top: 12px;
+    }
+
+    .members__box--body--text {
+      line-height: calc(28.8 / 16);
+    }
+  }
+</style>

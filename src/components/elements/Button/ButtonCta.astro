@@ -1,0 +1,46 @@
+---
+const { href = '#', label = 'クリック' } = Astro.props;
+---
+
+<a class="button-cta" href={href}>{label}</a>
+
+<style>
+  .button-cta {
+    background: linear-gradient(
+      to right,
+      rgba(139, 108, 58, 1),
+      rgba(177, 148, 100, 1),
+      rgba(139, 108, 58, 1)
+    );
+    width: 100%;
+    text-align: center;
+    padding-top: 27px;
+    padding-bottom: 25px;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--textTertiary);
+		border-radius: 2px;
+  }
+  .button-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    right: 37px;
+    width: 16px;
+    height: 16px;
+    border-right: 1px solid var(--borderTertiary);
+    border-bottom: 1px solid var(--borderTertiary);
+  }
+
+  .button-cta {
+    padding-block: 16px;
+    font-size: 16px;
+		line-height: calc(21 / 16);
+  }
+
+  .button-cta::before {
+    display: none;
+  }
+</style>

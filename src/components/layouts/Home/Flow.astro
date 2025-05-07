@@ -1,0 +1,138 @@
+---
+const flowItems = [
+  {
+    number: 'STEP01',
+    title: 'カウンセリング',
+    text: 'まずはカウンセリングでお体の状態やライフスタイルをお伺いし、今後の流れをご説明いたします。',
+    image: flowImage01,
+    alt: 'カウンセリング',
+  },
+  {
+    number: 'STEP02',
+    title: '測定・メニュー提案',
+    text: '体組成計で現在の身体の状態を確認します。その後、理想の身体になるためのトレーニングメニューをご提案させていただきます。',
+    image: flowImage02,
+    alt: '測定・メニュー提案',
+  },
+  {
+    number: 'STEP03',
+    title: 'トレーニング',
+    text: '専属のトレーナーがマンツーマンであなたのなりたい身体に合わせたトレーニングをサポートいたします。',
+    image: flowImage03,
+    alt: 'トレーニング',
+  },
+];
+
+import TitleSecondary from '../../elements/Title/TitleSecondary.astro';
+
+import { Image } from 'astro:assets';
+import flowImage01 from '../../../assets/images/index/flow/flow_image01.png';
+import flowImage02 from '../../../assets/images/index/flow/flow_image02.png';
+import flowImage03 from '../../../assets/images/index/flow/flow_image03.png';
+---
+
+<section class="flow">
+  <div class="flow__inner inner-primary">
+    <div class="flow__head">
+      <TitleSecondary title="FLOW" subTitle="パーソナルトレーニングの流れ" />
+    </div>
+    <div class="flow__boxes">
+      {
+        flowItems.map((flowItem) => (
+          <div class="flow__box js-order">
+            <div class="flow__box--body">
+              <div class="flow__box--body--head">
+                <p class="flow__box--body--number">{flowItem.number}</p>
+                <h3 class="flow__box--body--heading3">{flowItem.title}</h3>
+              </div>
+              <div class="flow__box--body--text-wrap">
+                <p class="flow__box--body--text">{flowItem.text}</p>
+              </div>
+            </div>
+            <div class="flow__box--image">
+              <Image src={flowItem.image} alt={flowItem.alt} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .flow {
+    padding-block: 96px;
+    background-color: var(--bgTertiary);
+  }
+
+  .flow__boxes {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+    gap: clamp(1.25rem, -3.048rem + 8.94vw, 5rem);
+  }
+
+  .flow__box {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+
+  .flow__box--body {
+    flex-grow: 1;
+  }
+
+  .flow__box--body--number {
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: var(--textSecondary);
+  }
+
+  .flow__box--body--heading3 {
+    margin-top: 16px;
+    font-size: 22px;
+    font-size: clamp(1.125rem, 0.838rem + 0.6vw, 1.375rem);
+    line-height: 1;
+    font-weight: 600;
+  }
+  .flow__box--body--text-wrap {
+    margin-top: 16px;
+  }
+
+  .flow__box--body--text {
+    line-height: calc(32 / 16);
+  }
+
+  @media (max-width: 768px) {
+    .flow__boxes {
+      grid-template-columns: repeat(1, 1fr);
+      max-width: 80%;
+      margin-inline: auto;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .flow {
+      padding-block: 56px;
+    }
+
+    .flow__boxes {
+      margin-top: 40px;
+      max-width: 100%;
+      gap: 40px;
+    }
+
+    .flow__box--body--heading3 {
+      line-height: calc(27 / 18);
+    }
+
+    .flow__box--body--text-wrap {
+      margin-top: 8px;
+    }
+
+    .flow__box--body--text {
+      line-height: calc(28.8 / 16);
+    }
+  }
+</style>

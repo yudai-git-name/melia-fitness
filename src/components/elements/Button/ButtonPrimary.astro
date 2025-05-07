@@ -1,0 +1,35 @@
+---
+const { href = '#', label = 'クリック' } = Astro.props;
+---
+
+<a class="button-primary" href={href}>{label}</a>
+
+<style>
+  .button-primary {
+    background: linear-gradient(
+      to right,
+      rgba(139, 108, 58, 1),
+      rgba(177, 148, 100, 1),
+      rgba(139, 108, 58, 1)
+    );
+    width: 100%;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 16px;
+    line-height: 1;
+    color: var(--textTertiary);
+    border-radius: 2px;
+    letter-spacing: 0.2em;
+  }
+
+	.button-primary:hover {
+		opacity: 0.8;
+	}
+
+  @media (max-width: 960px) {
+    .button-primary {
+      padding-block: 12px;
+      font-size: 14px;
+    }
+  }
+</style>
