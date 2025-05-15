@@ -65,29 +65,31 @@ import worriesBgSp from '../../../assets/images/index/worries/worries_bg-sp.png'
   gsapPhotoTargets.forEach((gsapPhotoTarget) => {
     const gsapPhotoTargetItem = gsapPhotoTarget.querySelector('.js-gsap-ph');
 
-    if (!gsapPhotoTargetItem) return; // nullなら処理をスキップ
+    if (!gsapPhotoTargetItem) return;
 
-    // 初期状態をセット（拡大）
-    gsap.set(gsapPhotoTargetItem, {
-      scale: 1.2,
+    // GPU促進のためのスタイルを追加（最上部に配置）
+    const el = gsapPhotoTargetItem as HTMLElement;
+    el.style.willChange = 'transform';
+    el.style.transform = 'translateZ(0)';
+    el.style.backfaceVisibility = 'hidden';
+    el.style.transformOrigin = 'center center'; // スケールの中心
+
+    // 初期状態をセット（軽く拡大）
+    gsap.set(el, {
+      scale: 1.1,
     });
 
-    // スクロールで拡大 → 等倍に戻すアニメーション
-    gsap.to(gsapPhotoTargetItem, {
+    // ScrollTriggerでscaleを戻す
+    gsap.to(el, {
       scale: 1,
+      ease: 'power3.out',
       scrollTrigger: {
         trigger: gsapPhotoTarget,
         start: 'top 100%',
         end: 'top top',
-        scrub: 1,
-        // markers: true,
+        scrub: 0.3, // 滑らかさ向上
       },
-      ease: 'power2.out',
     });
-
-    // GPUアクセラレーション用スタイル（必須ではないが推奨）
-    (gsapPhotoTargetItem as HTMLElement).style.willChange = 'transform';
-    (gsapPhotoTargetItem as HTMLElement).style.transform = 'translateZ(0)';
   });
 </script>
 

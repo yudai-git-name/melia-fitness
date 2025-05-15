@@ -10,11 +10,11 @@ import Footer from '../components/layouts/Footer.astro';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-		<meta name=”robots” content=”noindex”/>
+    <meta name="”robots”" content="”noindex”/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>melia fitness</title>
-		<meta name="description" content="melia fitnessの公式サイトです。" />
+    <meta name="description" content="melia fitnessの公式サイトです。" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -367,6 +367,17 @@ import Footer from '../components/layouts/Footer.astro';
       .br-sp-visible {
         display: block;
       }
+    }
+
+    .js-gsap-ph {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      will-change: transform;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      transform-origin: center center;
     }
   </style>
 </html>
