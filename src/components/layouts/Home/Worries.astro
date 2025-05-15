@@ -65,42 +65,29 @@ import worriesBgSp from '../../../assets/images/index/worries/worries_bg-sp.png'
   gsapPhotoTargets.forEach((gsapPhotoTarget) => {
     const gsapPhotoTargetItem = gsapPhotoTarget.querySelector('.js-gsap-ph');
 
-    const gsapPhotoTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: gsapPhotoTarget,
-        start: 'top bottom',
-        end: 'center center',
-        scrub: 1,
-        // markers: true,
-      },
+    if (!gsapPhotoTargetItem) return; // nullなら処理をスキップ
+
+    // 初期状態をセット（拡大）
+    gsap.set(gsapPhotoTargetItem, {
+      scale: 1.2,
     });
 
-    const gsapPhotoTL2 = gsap.timeline({
+    // スクロールで拡大 → 等倍に戻すアニメーション
+    gsap.to(gsapPhotoTargetItem, {
+      scale: 1,
       scrollTrigger: {
         trigger: gsapPhotoTarget,
-        start: 'top bottom',
+        start: 'top 100%',
         end: 'top top',
         scrub: 1,
         // markers: true,
       },
+      ease: 'power2.out',
     });
 
-    gsapPhotoTL.set(gsapPhotoTargetItem, {
-      filter: 'blur(20px) grayscale(1) brightness(1.5)',
-      scale: 1.4,
-    });
-
-    gsapPhotoTL
-      .to(gsapPhotoTargetItem, {
-        filter: 'blur(0px) grayscale(1) brightness(1.5)',
-      })
-      .to(gsapPhotoTargetItem, {
-        filter: 'blur(0px) grayscale(0) brightness(1)',
-      });
-
-    gsapPhotoTL2.to(gsapPhotoTargetItem, {
-      scale: 1,
-    });
+    // GPUアクセラレーション用スタイル（必須ではないが推奨）
+    (gsapPhotoTargetItem as HTMLElement).style.willChange = 'transform';
+    (gsapPhotoTargetItem as HTMLElement).style.transform = 'translateZ(0)';
   });
 </script>
 

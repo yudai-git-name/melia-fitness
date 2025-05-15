@@ -66,6 +66,43 @@ import GymSp from '../../../assets/images/index/qa/qa_gym-sp.png';
   </div>
 </section>
 
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const gsapPhotoTargets = document.querySelectorAll('.js-gsap-ph-trg');
+
+  gsapPhotoTargets.forEach((gsapPhotoTarget) => {
+    const gsapPhotoTargetItem = gsapPhotoTarget.querySelector('.js-gsap-ph');
+
+    if (!gsapPhotoTargetItem) return; // nullなら処理をスキップ
+
+    // 初期状態をセット（拡大）
+    gsap.set(gsapPhotoTargetItem, {
+      scale: 1.2,
+    });
+
+    // スクロールで拡大 → 等倍に戻すアニメーション
+    gsap.to(gsapPhotoTargetItem, {
+      scale: 1,
+      scrollTrigger: {
+        trigger: gsapPhotoTarget,
+        start: 'top 100%',
+        end: 'top top',
+        scrub: 1,
+        // markers: true,
+      },
+      ease: 'power2.out',
+    });
+
+    // GPUアクセラレーション用スタイル（必須ではないが推奨）
+    (gsapPhotoTargetItem as HTMLElement).style.willChange = 'transform';
+    (gsapPhotoTargetItem as HTMLElement).style.transform = 'translateZ(0)';
+  });
+</script>
+
 <style>
   .qa {
     padding-top: 96px;
