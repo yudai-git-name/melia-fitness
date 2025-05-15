@@ -47,7 +47,7 @@ import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
               </div>
               <p class="voice__box--body--name">{voice.name}</p>
             </div>
-            <div class="voice__box--image-wrap">
+            <div class="voice__box--image-wrap js-parallax">
               <Image
                 src={voice.image}
                 class="voice__box--image"
@@ -60,6 +60,37 @@ import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const wrappers = document.querySelectorAll('.js-parallax');
+
+    wrappers.forEach((wrapper) => {
+      const img = wrapper.querySelector('img');
+      if (!img) return;
+
+      gsap.fromTo(
+        img,
+        { y: '-10%' },
+        {
+          y: '10%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    });
+  });
+</script>
 
 <style>
   .voice {
@@ -123,8 +154,16 @@ import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
   }
 
   .voice__box--image-wrap {
+    position: relative;
+    overflow: hidden;
     max-width: calc((450 / 1060) * 100%);
     width: 100%;
+  }
+
+  .voice__box--image {
+    object-fit: cover;
+    will-change: transform;
+    transition: transform 0.3s ease;
   }
 
   @media (max-width: 768px) {
@@ -151,27 +190,27 @@ import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
       margin-top: 56px;
     }
 
-		.voice__boxes {
-			margin-top: 40px;
-			gap: 40px;
-		}
+    .voice__boxes {
+      margin-top: 40px;
+      gap: 40px;
+    }
 
-		.voice__box--body--text-wrap {
-			margin-top: 12px;
-		}
+    .voice__box--body--text-wrap {
+      margin-top: 12px;
+    }
 
     .voice__box--body,
     .voice__box--image-wrap {
       max-width: 100%;
     }
 
-		.voice__box--body--text {
-			line-height: calc(28.8 / 16);
-		}
+    .voice__box--body--text {
+      line-height: calc(28.8 / 16);
+    }
 
-		.voice__box--body--name {
-			text-align: left;
-			margin-top: 12px;
-		}
+    .voice__box--body--name {
+      text-align: left;
+      margin-top: 12px;
+    }
   }
 </style>
