@@ -77,11 +77,11 @@ import featureYogaImageSp from '../../../assets/images/index/feature/feature_yog
       }
     </div>
   </div>
-  <div class="feature__figure js-gsap-ph-trg">
-    <figure class="feature__figure--image-wrap">
+  <div class="feature__figure">
+    <figure class="feature__figure--image-wrap js-parallax">
       <picture>
         <source srcset={featureYogaImageSp.src} media="(max-width: 599px)" />
-        <Image src={featureYogaImagePc} class="js-gsap-ph" alt={''} />
+        <Image src={featureYogaImagePc} class="feature__figure--image" alt="" />
       </picture>
     </figure>
   </div>
@@ -93,35 +93,27 @@ import featureYogaImageSp from '../../../assets/images/index/feature/feature_yog
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const gsapPhotoTargets = document.querySelectorAll('.js-gsap-ph-trg');
+  window.addEventListener('DOMContentLoaded', () => {
+    const wrappers = document.querySelectorAll('.js-parallax');
 
-  gsapPhotoTargets.forEach((gsapPhotoTarget) => {
-    const gsapPhotoTargetItem = gsapPhotoTarget.querySelector('.js-gsap-ph');
+    wrappers.forEach((wrapper) => {
+      const img = wrapper.querySelector('img');
+      if (!img) return;
 
-    if (!gsapPhotoTargetItem) return;
-
-    // GPU促進のためのスタイルを追加（最上部に配置）
-    const el = gsapPhotoTargetItem as HTMLElement;
-    el.style.willChange = 'transform';
-    el.style.transform = 'translateZ(0)';
-    el.style.backfaceVisibility = 'hidden';
-    el.style.transformOrigin = 'center center'; // スケールの中心
-
-    // 初期状態をセット（軽く拡大）
-    gsap.set(el, {
-      scale: 1.1,
-    });
-
-    // ScrollTriggerでscaleを戻す
-    gsap.to(el, {
-      scale: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: gsapPhotoTarget,
-        start: 'top 100%',
-        end: 'top top',
-        scrub: 0.3, // 滑らかさ向上
-      },
+      gsap.fromTo(
+        img,
+        { y: '-10%' },
+        {
+          y: '10%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
     });
   });
 </script>
@@ -201,7 +193,15 @@ import featureYogaImageSp from '../../../assets/images/index/feature/feature_yog
   }
 
   .feature__figure {
+    position: relative;
+    overflow: hidden;
     margin-top: 96px;
+  }
+
+  .feature__figure--image {
+    object-fit: cover;
+    will-change: transform;
+    transition: transform 0.3s ease;
   }
 
   @media (max-width: 768px) {

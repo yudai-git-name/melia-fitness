@@ -47,7 +47,7 @@ import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
               </div>
               <p class="voice__box--body--name">{voice.name}</p>
             </div>
-            <div class="voice__box--image-wrap js-parallax">
+            <div class="voice__box--image-wrap">
               <Image
                 src={voice.image}
                 class="voice__box--image"
@@ -60,37 +60,6 @@ import VoiceImage03 from '../../../assets/images/index/voice/voice03.png';
     </div>
   </div>
 </section>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const wrappers = document.querySelectorAll('.js-parallax');
-
-    wrappers.forEach((wrapper) => {
-      const img = wrapper.querySelector('img');
-      if (!img) return;
-
-      gsap.fromTo(
-        img,
-        { y: '-10%' },
-        {
-          y: '10%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: wrapper,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      );
-    });
-  });
-</script>
 
 <style>
   .voice {
